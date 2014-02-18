@@ -1,5 +1,5 @@
 <configuration>
-	<!--Richard Liu @20091123-->
+	<!--Ming Li @20091123-->
 	<!--控制台日志-->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
@@ -46,7 +46,7 @@
 	<root level="ERROR">
 		<appender-ref ref="STDOUT" />
 	</root>
-	<!--Richard Liu-->
+	<!--Ming Li-->
 	<!--本应用日志配置-->
 	<logger name="com.ming" level="warn" additivity="true">
 		<appender-ref ref="FILE"/>

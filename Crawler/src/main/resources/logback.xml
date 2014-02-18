@@ -1,0 +1,54 @@
+<configuration>
+	<!--Richard Liu @20091123-->
+	<!--控制台日志-->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!--完整长堆栈，全部信息-->
+			<!--
+				<Pattern>[%d{yyyy-MM-dd
+				HH:mm:ss.SSS}][%thread][%class->%method#%line][%level]:
+				%msg%n</Pattern>
+			-->
+			<!--精简信息，普通调试-->
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%class{0}][%level]: %msg%n</Pattern>
+		</layout>
+	</appender>
+	<!--文件日志-->
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>../logs/crawler.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>../logs/crawler.log.%i.bak</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>600MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%class->%method#%line][%level]: %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<!--<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+		<connectionSource class="ch.qos.logback.core.db.DataSourceConnectionSource">
+			<dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">
+				<driverClass>oracle.jdbc.OracleDriver</driverClass>
+
+				<jdbcUrl>jdbc:oracle:thin:@localhost:1521:orcl</jdbcUrl>
+				<user>elog</user>
+				<password>elog</password>
+			</dataSource>
+		</connectionSource>
+	</appender>
+	--><!--ROOT日志记录器-->
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+	</root>
+	<!--Richard Liu-->
+	<!--本应用日志配置-->
+	<logger name="com.ming" level="warn" additivity="true">
+		<appender-ref ref="FILE"/>
+	</logger>
+</configuration>
